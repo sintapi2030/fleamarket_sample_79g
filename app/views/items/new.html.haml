@@ -24,7 +24,7 @@
   = @item.errors.full_messages_for(:shipping_id).first
   %br
   = f.label :status_id
-  = f.collection_select(:status_id, Status.all, :id, :name, {include_blank: "---"})
+  = f.collection_select (:status_id, Status.all, :id, :name, {include_blank: "___"})
   = @item.errors.full_messages_for(:status_id).first
   %br
   = f.hidden_field :seller_id, {value: current_user.id}

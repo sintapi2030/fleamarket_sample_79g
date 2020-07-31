@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, except: [:index, :new, :create, :sell]
+  before_action :set_item, except: [:index, :new, :create, :sell, :confirmation]
   def index
   end
 
@@ -25,6 +25,12 @@ class ItemsController < ApplicationController
   end
 
   def show
+    # @item = Item.all
+    # @item = Item.find(params[:id])
+    # @user = User.all
+    # @user = User.find_by(id: params[:id])
+    # @seller = Item.select("seller_id")
+    # @category = Category.select("category_name")
   end
 
   def item_params
