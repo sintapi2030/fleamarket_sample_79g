@@ -13,11 +13,13 @@ class Item < ApplicationRecord
 
   #image紐付け先のバリデーション
   validates_associated :images
-  validates :images, presence: { message: 'は１枚以上添付してください'} 
+  validates :images, presence: { message: 'は１枚以上添付してください'}
   #ここまでimageのバリデーション
 
-  has_many :images
+
+  has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
+
 
   #選択肢作成
   enum status: {
@@ -39,4 +41,9 @@ class Item < ApplicationRecord
     "送料込み(出品者負担)": "送料込み(出品者負担)",
     "着払い(購入者負担)": "着払い(購入者負担)"
   }
+
+  belongs_to :category
+  validates :category_id, presence: true
+  validates :category, presence: true, if: -> { category_id.present? }
+
 end
