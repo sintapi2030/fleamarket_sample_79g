@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
 
   before_action :set_item, except: [:index, :new, :create, :sell, :confirmation]
-
   def index
   end
 
@@ -37,25 +36,26 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # @item = Item.all
-    # @item = Item.find(params[:id])
-    # @user = User.all
-    # @user = User.find_by(id: params[:id])
-    # @seller = Item.select("seller_id")
-    # @category = Category.select("category_name")
+    @user_name = User.find(@item.id).nickname
+    @brand = Brand.find(@item.id).brand_name
+    @category_name = Category.find(@item.category_id).category_name
   end
 
+
+  def edit
+      @item.edit
+  end
+  
   def destroy
     @item.destroy
   end
 
   def item_params
-    params.require(:item).permit(:name, :price, :description, :status_id, :fee_id, :owner_area, :shipping_id, :seller_id, :category_id, images_attributes: [:image, :_destroy, :id])
+    params.require(:item).permit(:name, :price, :description, :status_id, :fee_id, :owner_area, :shipping_id, :seller_id, :category_id, :brand_id, images_attributes: [:image, :_destroy, :id])
   end
 
   def set_item
-    # カテゴリーボックスのさいにエラーが出てしまうので一時的にコメントアウト
-    # @item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
 
