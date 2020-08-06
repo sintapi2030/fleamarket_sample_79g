@@ -20,6 +20,25 @@
       background-color: #eee;
     }
   }
+  &__edit{
+    padding: 5px;
+    background-color: tomato;
+    color: #eee;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    margin-top: 50px;
+    &:hover{
+      opacity: 0.8;
+    }
+    &:active{
+      color: tomato;
+      background-color: #eee;
+    }
+  }
 }
 .detail__header{
   background-color: #ffffff;
