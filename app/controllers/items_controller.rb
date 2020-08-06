@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :destroy, :confirmation]
   def index
   end
 
@@ -32,6 +32,8 @@ class ItemsController < ApplicationController
   end
 
   def confirmation
+    @card = current_user.credit
+    @seller = User.find(@item.seller_id)
   end
 
   def show

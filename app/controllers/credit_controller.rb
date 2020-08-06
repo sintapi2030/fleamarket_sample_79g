@@ -41,15 +41,15 @@ class CreditController < ApplicationController
       redirect_to action: "new"
       flash[:alert] = '購入にはクレジットカード登録が必要です'
     else
-      @product = Product.find(params[:product_id])
-      card = current_user.credit_card
-      Payjp.api_key = Rails.application.credentials[:PAYJP_PRIVATE_KEY]
+      @item = Item.find(params[:item_id])
+      card = current_user.credit
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
       Payjp::Charge.create(
-        amount: @product.price,
+        amount: @item.price,
         customer: card.customer_id,
         current: 'jpy',
       )
-      if @product.update(status: 1, buyer_id: current_user.id)
+      if @item.update(buyer_id: current_user.id)
         flash[:notice] = '購入しました。'
         redirect_to controller: "items", action: 'show'
       else
