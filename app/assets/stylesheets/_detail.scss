@@ -9,7 +9,24 @@
     border-radius: 5px;
     position: absolute;
     right: 0;
-    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    &:hover{
+      opacity: 0.8;
+    }
+    &:active{
+      color: tomato;
+      background-color: #eee;
+    }
+  }
+  &__edit{
+    padding: 5px;
+    background-color: tomato;
+    color: #eee;
+    border-radius: 5px;
+    position: absolute;
+    margin-top: 50px;
+    right: 0;
     transform: translateY(-50%);
     text-decoration: none;
     &:hover{
@@ -196,8 +213,6 @@
   margin: 0 auto;
   &_show{
     object-fit: cover;
-    height: 364px;
-    display: none;
   }
 .image_sub{
   justify-content: center;
@@ -208,8 +223,6 @@
   &_show{
     margin-left: 10px;
     &_small{
-      display: none;
-      height: 87px;
       object-fit: cover;
     }
   }

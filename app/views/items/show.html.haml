@@ -98,13 +98,9 @@
               = link_to "商品の編集", edit_item_path, class: "detail__edit"
       .detail__image
         %ul.other__images
-          - @item.images.each do |image|
+          - @item.images.each do |image,i|
             %li.image
-              = image_tag image.image_url, class: "image_show"
-              %ul.image_sub
-                %il.image_sub_show
-                  = image_tag image.image_url,class: "image_sub_show_small"
-                  = image_tag image.image_url,class: "image_sub_show_small" 
+              = image_tag image.image_url, data: { index: i},class: "image_show"
       .items__price
         %h2 
           = @item.price
