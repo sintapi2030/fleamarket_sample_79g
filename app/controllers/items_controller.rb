@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:show, :edit, :destroy]
 
-  before_action :set_item, except: [:index, :new, :create, :sell, :confirmation]
   def index
   end
 
@@ -36,9 +36,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @user_name = User.find(@item.id).nickname
+    @user_name = User.find(@item.seller_id).nickname
+    @owner_place = User.find(@item.seller_id).address.prefecture.name
     @brand = Brand.find(@item.id).brand_name
     @category_name = Category.find(@item.category_id).category_name
+    @shipping = Shipping.find(@item.seller_id).name
+    @status = Status.find(@item.status_id).name
+    @fee = Fee.find(@item.fee_id).name
   end
 
 
