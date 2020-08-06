@@ -33,7 +33,14 @@ class ItemsController < ApplicationController
 
   def confirmation
     @card = current_user.credit
-    @seller = User.find(@item.seller_id)
+    if @card.blank?
+      redirect_to controller: "credit", action: "new"
+      flash[:alert] = '購入にはクレジットカード登録が必要です'
+    else
+      customer = Payjp::Customer.retrieve(@card.customer_id)
+      @customer_card = customer.cards.retrieve(@card.card_id)
+      @seller = User.find(@item.seller_id)
+    end
   end
 
   def show

@@ -108,11 +108,11 @@
         %h2 
           = "#{@item.price}円"
         %p (税込)送料込み 
-      - if user_signed_in? && @item.seller_id != current_user.id
-        %span
-          = link_to "購入する", confirmation_items_path, class: "items_buy"
       .item__text
         = @item.description
+      - if user_signed_in? && @item.seller_id != current_user.id
+        %span
+          = link_to "購入する", confirmation_item_path, class: "items_buy"
       %table.item_details
         %tr.item_details
           %th.item_details__lists
@@ -151,13 +151,11 @@
           %td.detail__content
             = @shipping
       .pagecontents
-        %ul.pagecontent
-          %li.pagecontent__list
-            = link_to '/',class: "left_text" do
-              ★お気に入り
-          %li.pagecontent__list
-            = link_to confirmation_item_path,class: "right_text" do
-              🏴購入する
+        //後半の実装のために一時的にコメントアウト
+        -# %ul.pagecontent
+        -#   %li.pagecontent__list
+        -#     = link_to '/',class: "left_text" do
+        -#       ★お気に入り
     //後半の実装のために一時的にコメントアウト
     -# .main_chat__form
     -#   = form_with model: @user, url: user_session_path, local: true do |f|

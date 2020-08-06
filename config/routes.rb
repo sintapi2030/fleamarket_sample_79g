@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       post :pay
       post :delete
       get :show
-      get :buy
+      post :buy
     end
   end
 end
