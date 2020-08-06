@@ -55,13 +55,12 @@
                 %li
                   = link_to '/',class: "Dropdwn__list" do
                     その他
-          = link_to "/", class: "Dropdwn__list-top" do
-            ブランド
         .Header__user-log
-          = link_to "/", class: "Header__list-right" do
-            ログイン
-          = link_to "/", class: "Header__list-right" do
-            新規登録画面
+          - if user_signed_in?
+            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right"
+          - else
+            = link_to "ログイン", new_user_session_path, class: "Header__list-right"
+            = link_to "新規登録画面", new_user_registration_path, class: "Header__list-right"
   .details
     %ul.details_lists
       %li.details_list
