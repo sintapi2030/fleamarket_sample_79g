@@ -1,9 +1,5 @@
 class ItemsController < ApplicationController
-
-
-
-  
-  before_action :set_item, only: [:show, :edit, :destroy, :confirmation]
+  before_action :set_item, only: [:show, :edit, :destroy]
   def index
   end
 
