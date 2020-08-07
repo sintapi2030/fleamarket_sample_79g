@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create, :sell, :confirmation]
+  before_action :move_to_index, except: [:index, :show]
+  
   def index
+    @items = Item.all.order(id:'DESC').limit(4)
+    @related_item = Item.all.sample(4)
   end
 
   def sell
@@ -38,7 +42,6 @@ class ItemsController < ApplicationController
     @user_name = User.find(@item.id).nickname
     @brand = Brand.find(@item.id).brand_name
     @category_name = Category.find(@item.category_id).category_name
-    
   end
 
 
@@ -58,5 +61,9 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
+  end
 end
