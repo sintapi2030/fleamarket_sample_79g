@@ -19,6 +19,16 @@
   border:1px solid #333;
   font-size: 14px;
 }
+@mixin link-btn{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: turquoise;
+  border: none;
+  font-size: 1.1em;
+  color: #eee;
+}
 
 //クレジット登録と詳細ページ双方に適用するスタイル
 
@@ -95,14 +105,7 @@
   margin-top: 30px;
 }
 .register-member{
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  background-color: turquoise;
-  border: none;
-  font-size: 1.1em;
-  color: #eee;
-
+  @include link-btn();
   &:hover{
     opacity: 0.8;
   }
@@ -114,3 +117,25 @@
 }
 
 //クレジット詳細のみに適用するスタイル
+.actions{
+  &__back{
+    display: block;
+    @include link-btn();
+    margin-top: 30px;
+    text-align: center;
+    &:hover{
+      opacity: 0.8;
+    }
+    &:active{
+      color: turquoise;
+      background-color: #eee;
+      outline: none;
+    }
+  }
+  & .deco-none{
+    text-decoration: none;
+    &:visited{
+      color: #eee;
+    }
+  }
+}

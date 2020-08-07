@@ -19,3 +19,4 @@
         = form_tag(delete_credit_index_path, method: :post, id: 'charge-form', name: "inputForm") do
           %input{ type: "hidden", name: "card_id", value: ""}
           %button.register-member 削除する
+        = link_to "戻る", user_path(current_user.id), class: "actions__back deco-none"
