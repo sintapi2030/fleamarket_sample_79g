@@ -2,7 +2,7 @@
   .Header__inner
     .Header__logo-search
       .Header__logo
-        = link_to image_tag("/images/logo.png", alt: "furima", class: "Header__logo-inner"), "#"
+        = link_to image_tag("/images/logo.png", alt: "furima", class: "Header__logo-inner"), root_path
 .UserDetails
   .UserDetails__inner
     .UserDetails__config
@@ -17,7 +17,7 @@
               いいね一覧
               = icon('fas', 'caret-right', class: "UserDetails__icon")
           .UserDetails__parent
-            = link_to '/', class: "UserDetails__child" do
+            = link_to new_item_path, class: "UserDetails__child" do
               出品する
               = icon('fas', 'caret-right', class: "UserDetails__icon")
           .UserDetails__parent
@@ -37,12 +37,16 @@
               発送元・お届け先住所変更
               = icon('fas', 'caret-right', class: "UserDetails__icon")
           .UserDetails__parent
-            = link_to '/', class: "UserDetails__child" do
-              クレジットカード登録
+            = link_to new_credit_path, class: "UserDetails__child" do
+              クレジットカード登録/詳細
               = icon('fas', 'caret-right', class: "UserDetails__icon")
           .UserDetails__parent
             = link_to destroy_user_session_path, data: { confirm: "本当にログアウトします？"}, method: :delete, class: "UserDetails__child logout" do
               ログアウト
+              = icon('fas', 'caret-right', class: "UserDetails__icon")
+          .UserDetails__parent
+            = link_to root_path, class: "UserDetails__child" do
+              戻る
               = icon('fas', 'caret-right', class: "UserDetails__icon")
 
     .UserDetails__mypage
