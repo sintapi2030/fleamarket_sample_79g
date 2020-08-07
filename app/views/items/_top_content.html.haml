@@ -61,6 +61,7 @@
         .Header__user-log
           - if user_signed_in?
             = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right"
+            = link_to "マイページ", user_path(current_user.id), class: "Header__list-right"
           - else
             = link_to "ログイン", new_user_session_path, class: "Header__list-right"
             = link_to "新規登録画面", new_user_registration_path, class: "Header__list-right"
