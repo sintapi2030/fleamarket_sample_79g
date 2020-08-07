@@ -54,6 +54,8 @@
       = form_tag(buy_credit_index_path, method: :post) do
         = hidden_field_tag :item_id, @item.id
         = submit_tag("購入する", class: "Confirmation-Content__btn")
+    %span
+      = link_to "戻る", item_path(@item.id), style: "float: left;"
   .Footer-Content
     = image_tag '/images/logo.png', alt: 'サイトロゴの画像', class: "Footer-Content__logo-image"
     %p= "Furima. inc"
