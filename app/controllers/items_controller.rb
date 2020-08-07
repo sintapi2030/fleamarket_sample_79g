@@ -33,6 +33,20 @@ class ItemsController < ApplicationController
   end
 
   def confirmation
+    if @item.buyer_id
+      flash[:alert] = '売却済みの商品のため、購入できません'
+      redirect_to action: "show"
+    end
+    @card = current_user.credit
+    if @card.blank?
+      redirect_to controller: "credit", action: "new"
+      flash[:alert] = '購入にはクレジットカード登録が必要です'
+    else
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
+      customer = Payjp::Customer.retrieve(@card.customer_id)
+      @customer_card = customer.cards.retrieve(@card.card_id)
+      @seller = User.find(@item.seller_id)
+    end
   end
 
   def show
@@ -43,6 +57,8 @@ class ItemsController < ApplicationController
     @shipping = Shipping.find(@item.seller_id).name
     @status = Status.find(@item.status_id).name
     @fee = Fee.find(@item.fee_id).name
+    @next_item = Item.where(id: (params[:id].to_i + 1))
+    @prev_item = Item.where(id: (params[:id].to_i - 1))
   end
 
 

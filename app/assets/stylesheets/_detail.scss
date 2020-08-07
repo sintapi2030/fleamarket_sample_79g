@@ -212,11 +212,21 @@ p {
   line-height: 60px;
   display: block;
   margin-top: 16px;
-  background-color: red;
   color: white;
   text-align: center;
   font-weight: 600;
   border-radius: 30px;
+  &.sold{
+    background-color: red;
+    opacity: .7;
+  }
+  &.available{
+    background-color: turquoise;
+    cursor: pointer;
+    &:hover{
+      opacity: .8;
+    }
+  }
 }
 
 .item__text {
