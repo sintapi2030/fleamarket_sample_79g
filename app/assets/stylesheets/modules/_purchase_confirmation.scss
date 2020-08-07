@@ -79,9 +79,8 @@ $cwhite: white;
     }
   }
   &__item-price{
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    display: inline-block;
+    margin-top: 20px;
 
     & > span{
       font-weight: bold;

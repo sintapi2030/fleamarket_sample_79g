@@ -13,7 +13,7 @@
         %span.Register-Inner__label= "有効期限: "
         %span.Register-Inner__expire
           - exp_month = @customer_card.exp_month.to_s
-          - exp_year = @customer_card.exp_month.to_s
+          - exp_year = @customer_card.exp_year.to_s
           = exp_month + "/" + exp_year
       .actions
         = form_tag(delete_credit_index_path, method: :post, id: 'charge-form', name: "inputForm") do
