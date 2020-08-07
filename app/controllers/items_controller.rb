@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
     @owner_place = User.find(@item.seller_id).address.prefecture.name
     @brand = Brand.find(@item.id).brand_name
     @category_name = Category.find(@item.category_id).category_name
-    @shipping = Shipping.find(@item.seller_id).name
+    @shipping = Shipping.find(@item.shipping_id).name
     @status = Status.find(@item.status_id).name
     @fee = Fee.find(@item.fee_id).name
     @next_item = Item.where(id: (params[:id].to_i + 1))
