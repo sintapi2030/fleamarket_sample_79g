@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
   resources :homes, only: [:new]
-  resources :credit, only: [:new, :show, :destroy] do
+  resources :credit, only: [:new, :destroy] do
     collection do
       post :pay
       post :delete
