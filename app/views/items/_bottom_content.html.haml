@@ -5,110 +5,57 @@
       .middle-main__pickupContainer__head__productBox
         .middle-main__pickupContainer__head__productBox__productHead
           新規投稿ページ
-        .middle-main__pickupContainer__head__productBox__productHead__productLists
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/IMG_9072.jpeg", size: "220x150", alt: "image1", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                ee
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  1000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                (税込)
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/a007.png", size: "220x150", alt: "image2", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                product3
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  30000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                (税込）
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/a004.png", size: "220x150", alt: "image3", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                product2
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  20000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                (税込）
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/a001.png", size: "220x150", alt: "image4", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                product1
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  10000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                （税込）
+          %br.middle-main__pickupContainer__head__productBox__productLists
+          - @items.each do |item|
+            .middle-main__pickupContainer__head__productBox__productLists__productList
+              = link_to item_path(item.id), class: "middle-main__pickupContainer__head__productBox__productLists__productList__path" do
+                .middle-main__pickupContainer__head__productBox__productLists__productList__box
+                  -if item.buyer_id.present?
+                    %ul.sold__out
+                      %li.sold__out__inner
+                        SOLD
+                      %li
+                        = image_tag item, class:"middle-main__pickupContainer__head__productBox__productLists__productList__image"
+                .middle-main__pickupContainer__head__productBox__productLists__productList__body
+                  .middle-main__pickupContainer__head__productBox__productLists__productList__body__name 
+                    = item.name
+                  %ul.middle-main__pickupContainer__head__productBox__productLists__productList__body__box
+                    %li.middle-main__pickupContainer__head__productBox__productLists__productList__body__box__price
+                      = item.price
+                    %li.middle-main__pickupContainer__head__productBox__productLists__productList__body__box__font
+                      -# = image_tag "/", alt:"#", class: "font__icon"
+                        -# = icon('fas', 'fa-star')
+                  .middle-main__pickupContainer__head__productBox__productLists__productList__body__tax
+                    (税込)
+  
     .middle-main__pickupContainer__head
       ピックアップブランド
       .middle-main__pickupContainer__head__productBox
         .middle-main__pickupContainer__head__productBox__productHead
           アーカイバ
-        .middle-main__pickupContainer__head__productBox__productHead__productLists
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/IMG_9072.jpeg", size: "220x150", alt: "image1", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                ee
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  1000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                (税込)
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/a007.png", size: "220x150", alt: "image2", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                product3
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  30000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                (税込）
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/a004.png", size: "220x150", alt: "image3", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                product2
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  20000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                (税込）
-          .middle-main__pickupContainer__head__productBox__productHead__productLists__productList
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image
-              = image_tag("/images/a001.png", size: "220x150", alt: "image4", class: "productList-image")
-            .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name
-                product1
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price
-                .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__font
-                  10000円
-                  = icon('fas', 'fa-star')
-              .middle-main__pickupContainer__head__productBox__productHead__productLists__productList__productList-image__productList-body__name__price__tax
-                （税込）
-  
+          %br.middle-main__pickupContainer__head__productBox__productLists
+          - @related_item.each do |item|
+            .middle-main__pickupContainer__head__productBox__productLists__productList
+              = link_to item_path(item.id), class: "middle-main__pickupContainer__head__productBox__productLists__productList__path" do
+                .middle-main__pickupContainer__head__productBox__productLists__productList__box
+                  -if item.buyer_id.present?
+                    %ul.sold__out
+                      %li.sold__out__inner
+                        SOLD
+                      %li
+                        = image_tag item, class:"middle-main__pickupContainer__head__productBox__productLists__productList__image"
+                .middle-main__pickupContainer__head__productBox__productLists__productList__body
+                  .middle-main__pickupContainer__head__productBox__productLists__productList__body__name 
+                    = item.name
+                  %ul.middle-main__pickupContainer__head__productBox__productLists__productList__body__box
+                    %li.middle-main__pickupContainer__head__productBox__productLists__productList__body__box__price
+                      = item.price
+                    %li.middle-main__pickupContainer__head__productBox__productLists__productList__body__box__font
+                      -# = image_tag "/", alt:"#", class: "font__icon"
+                        -# = icon('fas', 'fa-star')
+                  .middle-main__pickupContainer__head__productBox__productLists__productList__body__tax
+                    (税込)
+
   .middle-main__appBanner
     = image_tag("/images/bg-appBanner-pict.jpg", size: "#", alt: "haikei", class: "appBanner")
     .middle-main__appBanner__inner
