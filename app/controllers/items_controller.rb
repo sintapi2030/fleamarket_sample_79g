@@ -47,7 +47,6 @@ class ItemsController < ApplicationController
 
 
   def edit
-      @item.edit
   end
   
   def destroy
