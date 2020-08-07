@@ -92,9 +92,9 @@
           = @item.name
           - if user_signed_in? && @item.seller_id == current_user.id
             %span
-              = link_to "商品の削除", item_path(@item.id), method: :delete, class: "detail_delete"
+              = link_to "商品の削除", item_path(@item.id), method: :delete, class: "detail__delete"
             %span
-              = link_to "商品の編集", edit_item_path, class: "detail_delete"
+              = link_to "商品の編集", edit_item_path, class: "detail__edit"
       .detail__image
         %ul.other__images
           - @item.images.each do |image|
@@ -109,9 +109,13 @@
         %p (税込)送料込み 
       .item__text
         = @item.description
-      - if user_signed_in? && @item.seller_id != current_user.id
-        %span
-          = link_to "購入する", confirmation_item_path, class: "items_buy"
+      - if user_signed_in? && @item.seller_id != current_user.id 
+        - if @item.buyer_id
+          %span.items_buy.sold
+            = "売却済み"
+        - else
+          %span
+            = link_to "購入する", confirmation_item_path, class: "items_buy available"
       %table.item_details
         %tr.item_details
           %th.item_details__lists
@@ -168,14 +172,16 @@
     .other__chat
       %ul.other__items
         %li.other__left
-          = link_to '/',class: "before" do
-            < 前の商品
+          - if (@prev_item.present?)
+            = link_to item_path(@prev_item.first.id),class: "before" do
+              < 前の商品
         %li.other__right
-          = link_to '/',class: "after" do
-            後ろの商品＞
-    .category1_items
-      = link_to '/',class: "category1_form" do
-        メンズをもっと見る
+          - if (@next_item.present?)
+            = link_to item_path(@next_item.first.id),class: "after" do
+              次の商品＞
+    -# .category1_items
+    -#   = link_to '/',class: "category1_form" do
+    -#     メンズをもっと見る
 
 .middle-main
   .middle-main__pickupContainer
