@@ -1,7 +1,8 @@
-.detail
-  .detail__header
-    .Header
-      = link_to image_tag("/images/logo.png", alt: "furima", class: "Header__logo-inner"), "#"
+.Header
+  .Header__inner
+    .Header__logo-search
+      .Header__logo
+        = link_to image_tag("/images/logo.png", alt: "furima", class: "Header__logo-inner"), "#"
       .Search
         = form_with(url: "#", method: :get, class: "Header__search-inner") do |f|
           .Search__box
@@ -55,6 +56,8 @@
                 %li
                   = link_to '/',class: "Dropdwn__list" do
                     その他
+          = link_to "/", class: "Dropdwn__list-top" do
+            ブランド
         .Header__user-log
           - if user_signed_in?
             = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right"
