@@ -41,7 +41,7 @@
                         = i.file_field :image, data: {index: "#{0}"},class: 'js-file',style: "display: none"
                         - if @item.persisted?
                           .js-file_group{data: {index: @item.images.count}}
-                            = i.check_box :_destroy,class: "hidden-destroy"
+                            = i.check_box :_destroy,class: "hidden-destroy", style: "display: block;"
                     = @item.errors.full_messages_for(:images).first
             %hr.Sell_warrap_index_main_center_border
             .Sell_warrap_index_main_center_content
