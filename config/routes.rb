@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'items/sell'
   resources :users, only: [:show, :edit, :update]
   resources :items do
-    member do #最終的にmemberに切り替える
+    member do
       get :confirmation
     end
     collection do
