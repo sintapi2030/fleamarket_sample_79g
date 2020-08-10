@@ -52,7 +52,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    binding.pry
     @user_name = User.find(@item.seller_id).nickname
     @owner_place = User.find(@item.seller_id).address.prefecture.name
     @brand = Brand.find(@item.id).brand_name
