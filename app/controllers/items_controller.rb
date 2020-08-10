@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  # before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:show, :edit,:update, :destroy, :confirmation]
 
   def index
@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show　
+  def show
     @user_name = User.find(@item.seller_id).nickname
     @owner_place = User.find(@item.seller_id).address.prefecture.name
     @brand = Brand.find(@item.id).brand_name
