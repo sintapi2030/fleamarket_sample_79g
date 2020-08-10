@@ -60,6 +60,8 @@
             ブランド
         .Header__user-log
           - if user_signed_in?
+            %span.Header__list-right
+              = current_user.nickname
             = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right"
           - else
             = link_to "ログイン", new_user_session_path, class: "Header__list-right"
@@ -142,7 +144,6 @@
           %th.item_details__lists
             配送料の負担
           %td.detail__content
-            = @item.fee.name
             = @fee
         %tr.item_details
           %th.item_details__lists
