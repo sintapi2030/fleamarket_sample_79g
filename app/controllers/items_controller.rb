@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:index, :show, :edit, :destroy, :confirmation]
+  before_action :set_item, only: [:show, :edit,:update, :destroy, :confirmation]
+
   def index
     @items = Item.all.order(id:'DESC').limit(4)
     @related_item = Item.all.sample(4)
@@ -13,6 +14,7 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @category_parent_array = Category.where(ancestry: nil)
+
   end
 
   def get_category_children
@@ -56,7 +58,7 @@ class ItemsController < ApplicationController
     @owner_place = User.find(@item.seller_id).address.prefecture.name
     @brand = Brand.find(@item.id).brand_name
     @category_name = Category.find(@item.category_id).category_name
-    @shipping = Shipping.find(@item.seller_id).name
+    @shipping = Shipping.find(@item.shipping_id).name
     @status = Status.find(@item.status_id).name
     @fee = Fee.find(@item.fee_id).name
     @next_item = Item.where(id: (params[:id].to_i + 1))
@@ -65,12 +67,28 @@ class ItemsController < ApplicationController
 
 
   def edit
-  end
-  
-  def destroy
-    @item.destroy
+
+    @category_parent_array = Category.where(ancestry: nil)
+
   end
 
+
+
+
+  def update
+    if @item.update_attributes(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit
+    end
+end
+
+
+  def destroy
+
+  end
+
+  private
   def item_params
     params.require(:item).permit(:name, :price, :description, :status_id, :fee_id, :owner_area, :shipping_id, :seller_id, :category_id, :brand_id, images_attributes: [:image, :_destroy, :id])
   end

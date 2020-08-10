@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "items#index"
+  post 'items/:id' ,to: 'items#show'
+  
   resources :users, only: [:show, :edit, :update]
   resources :items do
-    member do #最終的にmemberに切り替える
+    member do
       get :confirmation
     end
     collection do
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
   resources :homes, only: [:new]
-  resources :credit, only: [:new, :show, :destroy] do
+  resources :credit, only: [:new, :destroy] do
     collection do
       post :pay
       post :delete
