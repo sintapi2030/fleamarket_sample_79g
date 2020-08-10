@@ -48,14 +48,16 @@ $(document).on("turbolinks:load", () => {
   });
 
   $("#previews").on("click", ".img-wrapper", function (e) {
-    const targetIndex = $(this).children('img').data('index');
+    const targetIndex = $(this).children("img").data("index");
     // 該当indexを振られているチェックボックスを取得する
     const hiddenCheck = $(`input[data-index="${targetIndex}"].hidden-destroy`);
     // もしチェックボックスが存在すればチェックを入れる
-    if (hiddenCheck) {hiddenCheck.prop("checked", true);}
+    if (hiddenCheck) {
+      hiddenCheck.prop("checked", true);
+    }
     $(this).remove();
     $(`input[data-index="${targetIndex}"]`).remove();
-    
+
     // $(`img[data-index="${targetIndex}"]`).remove();
 
     // 画像入力欄が0個にならないようにしておく

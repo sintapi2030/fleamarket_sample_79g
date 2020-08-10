@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :destroy]
+  before_action :set_item, only: [:show, :edit, :update ,:destroy]
+
   def index
   end
 
@@ -10,6 +11,7 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @category_parent_array = Category.where(ancestry: nil)
+
   end
 
   def get_category_children
@@ -34,7 +36,7 @@ class ItemsController < ApplicationController
   def confirmation
   end
 
-  def show
+  def show　
     @user_name = User.find(@item.seller_id).nickname
     @owner_place = User.find(@item.seller_id).address.prefecture.name
     @brand = Brand.find(@item.id).brand_name
@@ -46,13 +48,26 @@ class ItemsController < ApplicationController
 
 
   def edit
-      @item.edit
-  end
-  
-  def destroy
-    @item.destroy
+    @category_parent_array = Category.where(ancestry: nil)
   end
 
+
+
+
+  def update
+    if @item.update_attributes(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit
+    end
+end
+
+
+  def destroy
+
+  end
+
+  private
   def item_params
     params.require(:item).permit(:name, :price, :description, :status_id, :fee_id, :owner_area, :shipping_id, :seller_id, :category_id, :brand_id, images_attributes: [:image, :_destroy, :id])
   end
@@ -60,6 +75,5 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-
 
 end

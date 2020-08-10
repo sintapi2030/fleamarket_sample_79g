@@ -69,27 +69,27 @@
           メンズ
       %li.details_list
         = link_to '/',class: "fa" do
-          > 
+          >
       %li.details_list
         = link_to '/',class: "detail_list" do
           ジャケットアウター
       %li.details_list
         = link_to '/',class: "fa" do
-          > 
+          >
       %li.details_list
         = link_to '/',class: "detail_list" do
           ノーカラージャケット
       %li.details_list
         = link_to '/',class: "fa" do
-          >       
+          >
       %li.details_list
         = link_to '/',class: "detail_list" do
           = @item.name
-.mainWarrapp  
+.mainWarrapp
   .detail__main
     .detail_main__box
-      .detail__title 
-        %h1 
+      .detail__title
+        %h1
           = @item.name
           - if user_signed_in? && @item.seller_id == current_user.id
             %span
@@ -105,9 +105,9 @@
                 %il.image_sub_show
                   = image_tag image.image_url,class: "image_sub_show_small"
       .items__price
-        %h2 
+        %h2
           = "#{@item.price}円"
-        %p (税込)送料込み 
+        %p (税込)送料込み
       - if user_signed_in? && @item.seller_id != current_user.id
         %span
           = link_to "購入する", confirmation_items_path, class: "items_buy"
@@ -227,7 +227,7 @@
           FURIMAロゴ利用ガイドライン
         .middle-main__top-footer__case__break__footer-title__outline__privacy__terms
           お知らせ
-          
+
   .middle-main__purchaseBtn
     .middle-main__purchaseBtn__purchase-text
       出品する
