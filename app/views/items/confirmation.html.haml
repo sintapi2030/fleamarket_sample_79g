@@ -9,50 +9,53 @@
       %li.Confirmation-Content__list
         .Confirmation-Content__leftfield 
           .Confirmation-Content__item-image
-            = image_tag '/images/sample_item.png'
+            = image_tag(@item.images.first.image.url, alt:"商品の写真")
         .Confirmation-Content__rightfield
           .Confirmation-Content__item-title
-            = 'サイコロ６面　青、赤、緑、黄４色入り'
+            = @item.description
           .Confirmation-Content__item-price
             = "送料込み(税込み)"
             %span
-              = "¥5,800"
+              = "¥#{@item.price.to_s(:delimited, delimiter: ',')}円"
       %li.Confirmation-Content__list
         .Confirmation-Content__leftfield
           %p= "支払い金額"
         .Confirmation-Content__rightfield
-          %p= "¥5,800"
+          %p= "¥#{@item.price.to_s(:delimited, delimiter: ',')}円"
       %li.Confirmation-Content__list
         .Confirmation-Content__leftfield.CardInfo
           %p.CardInfo__title
             = "支払い方法"
           %ul.CardInfo__lists
             %li.CardInfo__security-key
-              = "************3333"
+              = "**** **** **** #{@customer_card.last4}"
             %li.CardInfo__expired-day
-              = "有効期限 12 / 21"
-            %li.CardInfo__company
-              = image_tag '/images/visa.png', class: "CardInfo__image"
+              = "有効期限 : #{@customer_card.exp_month.to_s} / #{@customer_card.exp_year.to_s}"
           
         .Confirmation-Content__rightfield
-          = link_to "カードを変更する", '#'
+          = link_to "カードを変更する", new_credit_path
       %li.Confirmation-Content__list
         .Confirmation-Content__leftfield.AddressInfo
           %P.AddressInfo__title
             = "配送先"
           %ul.AddressInfo__lists
             %li.AddressInfo__poscode
-              = "123-4567"
+              = @seller.address.zipcode.to_s.insert(3, "-")
             %li.AddressInfo__address
-              = "神奈川県　横浜市　○○1-1"
-            %li.AddressInfo__others
-              = "テックキャンプメゾン243号"
+              = "#{@seller.address.prefecture.name} #{@seller.address.city} #{@seller.address.address}"
+            - if @seller.address.others
+              %li.AddressInfo__others
+                = @seller.address.others
             %li.AddressInfo__name
-              = "フリマ太郎"
+              = "#{@seller.family_name}#{@seller.first_name} 様"
         .Confirmation-Content__rightfield
           = link_to "配送先を変更する", '#'
     .ButtonBox
-      %button.Confirmation-Content__btn= "購入する"
+      = form_tag(buy_credit_index_path, method: :post) do
+        = hidden_field_tag :item_id, @item.id
+        = submit_tag("購入する", class: "Confirmation-Content__btn")
+    %span
+      = link_to "戻る", item_path(@item.id), style: "float: left;"
   .Footer-Content
     = image_tag '/images/logo.png', alt: 'サイトロゴの画像', class: "Footer-Content__logo-image"
     %p= "Furima. inc"

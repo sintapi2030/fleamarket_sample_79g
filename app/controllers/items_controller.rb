@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update ,:destroy]
+
+  before_action :set_item, only: [:show, :edit,:update, :destroy, :confirmation]
 
   def index
   end
@@ -34,6 +35,20 @@ class ItemsController < ApplicationController
   end
 
   def confirmation
+    if @item.buyer_id
+      flash[:alert] = '売却済みの商品のため、購入できません'
+      redirect_to action: "show"
+    end
+    @card = current_user.credit
+    if @card.blank?
+      redirect_to controller: "credit", action: "new"
+      flash[:alert] = '購入にはクレジットカード登録が必要です'
+    else
+      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
+      customer = Payjp::Customer.retrieve(@card.customer_id)
+      @customer_card = customer.cards.retrieve(@card.card_id)
+      @seller = User.find(@item.seller_id)
+    end
   end
 
   def show　
@@ -41,14 +56,18 @@ class ItemsController < ApplicationController
     @owner_place = User.find(@item.seller_id).address.prefecture.name
     @brand = Brand.find(@item.id).brand_name
     @category_name = Category.find(@item.category_id).category_name
-    @shipping = Shipping.find(@item.seller_id).name
+    @shipping = Shipping.find(@item.shipping_id).name
     @status = Status.find(@item.status_id).name
     @fee = Fee.find(@item.fee_id).name
+    @next_item = Item.where(id: (params[:id].to_i + 1))
+    @prev_item = Item.where(id: (params[:id].to_i - 1))
   end
 
 
   def edit
+
     @category_parent_array = Category.where(ancestry: nil)
+
   end
 
 

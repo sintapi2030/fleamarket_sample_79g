@@ -13,17 +13,21 @@ Rails.application.routes.draw do
   get 'items/sell'
   resources :users, only: [:show, :edit, :update]
   resources :items do
-    collection do #最終的にmemberに切り替える
+    member do #最終的にmemberに切り替える
       get :confirmation
+    end
+    collection do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
     end
   end
   resources :homes, only: [:new]
-  resources :credit, only: [:new, :show, :destroy] do
-    member do
-      get :pay
-      get :buy
+  resources :credit, only: [:new, :destroy] do
+    collection do
+      post :pay
+      post :delete
+      get :show
+      post :buy
     end
   end
 end
