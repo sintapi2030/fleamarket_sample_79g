@@ -389,10 +389,10 @@
 }
 
 #js-file_group {
-  position: relative;
+  // position: relative;
   & .js-file {
     display: none;
-    position: absolute;
+    // position: absolute;
   }
 }
 
@@ -463,4 +463,13 @@
 }
 #js-file_group {
   margin-top: 40px;
+}
+
+.js-file_group{
+  // position: absolute;
+  // left: 0;
+}
+
+#js-file_group_edit{
+  margin-top: 50px;
 }

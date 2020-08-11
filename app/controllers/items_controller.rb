@@ -1,8 +1,10 @@
 class ItemsController < ApplicationController
-  # before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:show, :edit,:update, :destroy, :confirmation]
 
   def index
+    @items = Item.all.order(id:'DESC').limit(4)
+    @related_item = Item.all.sample(4)
   end
 
   def sell
@@ -25,6 +27,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    binding.pry
     if @item.save
       redirect_to items_path(@item)
     else
@@ -61,13 +64,44 @@ class ItemsController < ApplicationController
     @fee = Fee.find(@item.fee_id).name
     @next_item = Item.where(id: (params[:id].to_i + 1))
     @prev_item = Item.where(id: (params[:id].to_i - 1))
+
+    if @item.category.has_parent?
+      if @item.category.parent.has_parent?
+        @grandchild = @item.category
+        @child = @item.category.parent
+        @parent = @item.category.parent.parent
+        @grandchildren = @child.children
+        @children = @parent.children
+      else
+        @child = @item.category
+        @parent = @item.category.parent
+        @children = @parent.children
+      end
+    else
+      @parent = @item.category
+    end
+
   end
 
 
   def edit
 
     @category_parent_array = Category.where(ancestry: nil)
-
+    if @item.category.has_parent?
+      if @item.category.parent.has_parent?
+        @grandchild = @item.category
+        @child = @item.category.parent
+        @parent = @item.category.parent.parent
+        @grandchildren = @child.children
+        @children = @parent.children
+      else
+        @child = @item.category
+        @parent = @item.category.parent
+        @children = @parent.children
+      end
+    else
+      @parent = @item.category
+    end
   end
 
 
@@ -76,7 +110,25 @@ class ItemsController < ApplicationController
   def update
     if @item.update_attributes(item_params)
       redirect_to item_path(@item)
+      binding.pry
     else
+      @item = Item.find(params[:id])
+      @category_parent_array = Category.where(ancestry: nil)
+      if @item.category.has_parent?
+        if @item.category.parent.has_parent?
+          @grandchild = @item.category
+          @child = @item.category.parent
+          @parent = @item.category.parent.parent
+          @grandchildren = @child.children
+          @children = @parent.children
+        else
+          @child = @item.category
+          @parent = @item.category.parent
+          @children = @parent.children
+        end
+      else
+        @parent = @item.category
+      end
       render :edit
     end
 end
@@ -95,4 +147,9 @@ end
     @item = Item.find(params[:id])
   end
 
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
+  end
 end

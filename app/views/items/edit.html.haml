@@ -31,17 +31,20 @@
                               - @item.images.each_with_index do |image, i|
                                 .img-wrapper
                                   = image_tag image.image.url, data: { index: i}, width: "100", height: "100"
-                        = f.label :image , class: "add" do
-                          %p.add__action 写真を追加する
-                        = f.file_field :image,  name: "item[images_attributes][#{@item.images.count}][image]",style: "display: none"
-                    = f.fields_for :images do |i|
-                      #js-file_group
+                        .addImgBox
+                          = f.label :image , class: "add" do
+                            %p.add__action 写真を追加する
+                          = f.file_field :image,  name: "item[images_attributes][#{@item.images.count}][image]",style: "display: none", data: {index: "#{@item.images.count}"}, class: "add-pic"
+                    #js-file_group_edit
+                      = f.fields_for :images do |i|
                         = i.label :image do
                           %p.edit-btn"#{i.index+1}枚目の画像を変更する"
-                        = i.file_field :image, data: {index: "#{0}"},class: 'js-file',style: "display: none"
+                        = i.file_field :image, data: {index: "#{i.index}"},class: 'js-file',style: "display: none"
                         - if @item.persisted?
-                          .js-file_group{data: {index: @item.images.count}}
-                            = i.check_box :_destroy,class: "hidden-destroy", style: "display: block;"
+                          .js-file_group{data: {index: i.index}}
+                            %span.position_right
+                              = "削除"
+                              = i.check_box :_destroy
                     = @item.errors.full_messages_for(:images).first
             %hr.Sell_warrap_index_main_center_border
             .Sell_warrap_index_main_center_content
@@ -90,9 +93,29 @@
                         必須
                     .Sell_warrap_index_main_center_content_box_body_contents
                       .Sell_warrap_index_main_center_content_box_body_contents_filed
-                        = f.collection_select :category_id, @category_parent_array, :id, :category_name,{selected: @item.category.id}, {class: 'Sell_warrap_index_main_center_content_box_body_contents_filed_category', id: 'parent_category'}
+                        = f.collection_select :category_id, @category_parent_array, :id, :category_name,{selected: @parent.id}, {class: 'Sell_warrap_index_main_center_content_box_body_contents_filed_category', id: 'parent_category'}
                         = @item.errors.full_messages_for(:category_id).first
                     .Sell_warrap_index_main_center_content_box_body_photos_popup
+                - if @child
+                  #child_wrapper.Sell_warrap_index_main_center_content_box_body_contents
+                    .Sell_warrap_index_main_center_content_box_body_contents_filed
+                      %select.Sell_warrap_index_main_center_content_box_body_contents_filed_category#child_category{name: "category_id"}
+                        - @children.each do |child|
+                          %option{value: "#{child.id}", data: {category: "#{child.id}"}}
+                            = child.category_name
+                            - if child.id == @child.id
+                              %option{value: "#{child.id}", data: {category:"#{child.id}"}, selected: child.id}
+                                = child.category_name
+                - if @grandchild
+                  #grandchild_wrapper.Sell_warrap_index_main_center_content_box_body_contents
+                    .Sell_warrap_index_main_center_content_box_body_contents_filed
+                      %select.Sell_warrap_index_main_center_content_box_body_contents_filed_category#grandchild_category{name: "category_id"}
+                        - @grandchildren.each do |grandchild|
+                          %option{value: "#{grandchild.id}", data: {category: "#{grandchild.id}"}}
+                            = grandchild.category_name
+                            - if grandchild.id == @grandchild.id
+                              %option{value: "#{grandchild.id}", data: {category:"#{grandchild.id}"}, selected: grandchild.id}
+                                = grandchild.category_name
 
               .Sell_warrap_index_main_center_content_box
                 .Sell_warrap_index_main_center_content_box_body
