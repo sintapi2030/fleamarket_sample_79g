@@ -109,7 +109,6 @@ class ItemsController < ApplicationController
   def update
     if @item.update_attributes(item_params)
       redirect_to item_path(@item)
-      binding.pry
     else
       @item = Item.find(params[:id])
       @category_parent_array = Category.where(ancestry: nil)
