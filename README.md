@@ -11,13 +11,9 @@ Users can create their free-market accounts with this application, and sell or p
 
 ## 説明:Description
 
-・ユーザー登録機能としてSNS及びSMS認証等を行い、クレジットカードを登録できます。
-
 ・商品出品機能として画像や商品カテゴリを含めた複数項目の情報をDBへ登録することができます。
 
 ・商品購入機能としてユーザーが所持するクレジットカードを用いて商品の購入ができます。
-
-・SNS, SMS authentication is used to create a user account. Also, within a user account, a credit card can be registered.
 
 ・Users can produce their products by uploading a photo or selecting its category, which will be stored in a database.
 
@@ -162,8 +158,6 @@ belongs_to :brand
 ### association
 belongs_to :item
 
-### association
-
 ## brands
 | Column     | Type       | Options    |
 | ---------- | -----------| ---------- |
@@ -190,5 +184,3 @@ has_many :items
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-zxczxczxczasdas
