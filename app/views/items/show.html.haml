@@ -135,8 +135,12 @@
           %th.item_details__lists
             カテゴリー
           %td.detail__content
-            = link_to "" ,class: "item__list" do
-              = @category_name
+            - if @grandchild
+              = "#{@parent.category_name} > #{@child.category_name} > #{@grandchild.category_name}"
+            - elsif @child
+              = "#{@parent.category_name} > #{@child.category_name}"
+            - else @parent
+              = @parent.category_name
         %tr.item_details
           %th.item_details__lists
             ブランド
