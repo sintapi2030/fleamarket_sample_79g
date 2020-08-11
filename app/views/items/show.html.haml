@@ -62,7 +62,8 @@
           - if user_signed_in?
             %span.Header__list-right
               = current_user.nickname
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right"
+            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right", style: "margin-right: 10px;"
+            = link_to "マイページ", user_path(current_user.id), class: "Header__list-right"
           - else
             = link_to "ログイン", new_user_session_path, class: "Header__list-right"
             = link_to "新規登録画面", new_user_registration_path, class: "Header__list-right"
@@ -70,22 +71,24 @@
     %ul.details_lists
       %li.details_list
         = link_to '/',class: "detail_list" do
-          メンズ
+          = @parent.category_name
       %li.details_list
         = link_to '/',class: "fa" do
           >
-      %li.details_list
-        = link_to '/',class: "detail_list" do
-          ジャケットアウター
-      %li.details_list
-        = link_to '/',class: "fa" do
-          >
-      %li.details_list
-        = link_to '/',class: "detail_list" do
-          ノーカラージャケット
-      %li.details_list
-        = link_to '/',class: "fa" do
-          >
+      - if @child
+        %li.details_list
+          = link_to '/',class: "detail_list" do
+            = @child.category_name
+        %li.details_list
+          = link_to '/',class: "fa" do
+            >
+      - if @grandchild
+        %li.details_list
+          = link_to '/',class: "detail_list" do
+            = @grandchild.category_name
+        %li.details_list
+          = link_to '/',class: "fa" do
+            >
       %li.details_list
         = link_to '/',class: "detail_list" do
           = @item.name
