@@ -83,11 +83,11 @@
                   font-weight: 600;
                 }
               }
-              &__image{
-                height: 100%;
-                width: 150px;
-                border-style: none;
-              }
+            }
+            &__image{
+              height: 100%;
+              width: 100%;
+              border-style: none;
             }
             &__body{
               position: relative;
