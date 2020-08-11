@@ -60,7 +60,9 @@
             ブランド
         .Header__user-log
           - if user_signed_in?
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right"
+            %span.Header__list-right
+              = current_user.nickname
+            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right", style: "margin-right: 10px;"
             = link_to "マイページ", user_path(current_user.id), class: "Header__list-right"
           - else
             = link_to "ログイン", new_user_session_path, class: "Header__list-right"

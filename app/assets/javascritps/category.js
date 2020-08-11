@@ -8,7 +8,7 @@ $(document).on("turbolinks:load", function () {
       var childSelectHtml = "";
       childSelectHtml = `<div class="Sell_warrap_index_main_center_content_box_body_contents" id="child_wrapper">
                         <div class="Sell_warrap_index_main_center_content_box_body_contents_filed">
-                          <select class="Sell_warrap_index_main_center_content_box_body_contents_filed_category" id="child_category" name="category_id">
+                          <select class="Sell_warrap_index_main_center_content_box_body_contents_filed_category" id="child_category" name="item[category_id]">
                             <option value="---" data-category="---">---</option>
                               ${insertHTML}
                           <select>
@@ -22,7 +22,7 @@ $(document).on("turbolinks:load", function () {
       var grandchildSelectHtml = "";
       grandchildSelectHtml = `<div class="Sell_warrap_index_main_center_content_box_body_contents" id="grandchild_wrapper">
                               <div class="Sell_warrap_index_main_center_content_box_body_contents_filed">
-                                <select class="Sell_warrap_index_main_center_content_box_body_contents_filed_category" id="child_category" name="category_id">
+                                <select class="Sell_warrap_index_main_center_content_box_body_contents_filed_category" id="child_category" name="item[category_id]">
                                   <option value="---" data-category="---">---</option>
                                     ${insertHTML}
                                 <select>
