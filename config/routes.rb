@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # post 'items/:id' ,to: 'items#show'
   
   resources :users, only: [:show, :edit, :update]
+  resources :addresses, only: [:edit, :update]
   resources :items do
     member do
       get :confirmation
