@@ -55,24 +55,6 @@ Users can create their free-market accounts with this application, and sell or p
 <dd>payjp</dd>
 </dl>
 
-
-## データベース設計:Database design
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database ER chart
----------------
-
 ## ERD図:EntityRelashionshipDiagram
 
 <img width="633" alt="スクリーンショット 2020-07-22 19 25 52" src="https://user-images.githubusercontent.com/66852865/88165808-3f060d80-cc51-11ea-8d78-de5ee6dd07d6.png">
