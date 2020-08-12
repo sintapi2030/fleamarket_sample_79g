@@ -1,97 +1,29 @@
-.Header
-  .Header__inner
-    .Header__logo-search
-      .Header__logo
-        = link_to image_tag("/images/logo.png", alt: "furima", class: "Header__logo-inner"), "#"
-      .Search
-        = form_with(url: "#", method: :get, class: "Header__search-inner") do |f|
-          .Search__box
-            =f.text_field :keyword, placeholder: "キーワードから探す", class: "Search__field"
-            =f.label :keyword do
-              = f.submit "検索",style: "display: none"
-              = icon('fas', 'search', class: "Search__icon")
-    .Header__nav
-      .Header__items
-        .Header__category
-          %ul.Dropdwn
-            %li.Dropdwn__list-top
-              カテゴリー
-              %ul.Dropdwn__menu
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    レディース
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    メンズ
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    ベビー・キッズ
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    インテリア・住まい・小物
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    本・音楽・ゲーム
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    おもちゃ・ホビー・グッズ
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    コスメ・香水・美容
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    家電・スマホ・カメラ
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    スポーツ・レジャー
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    ハンドメイド
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    チケット
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    自動車・オートバイ
-                %li
-                  = link_to '/',class: "Dropdwn__list" do
-                    その他
-          = link_to "/", class: "Dropdwn__list-top" do
-            ブランド
-        .Header__user-log
-          - if user_signed_in?
-            %span.Header__list-right
-              = current_user.nickname
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "Header__list-right", style: "margin-right: 10px;"
-            = link_to "マイページ", user_path(current_user.id), class: "Header__list-right"
-          - else
-            = link_to "ログイン", new_user_session_path, class: "Header__list-right"
-            = link_to "新規登録画面", new_user_registration_path, class: "Header__list-right"
-  .details
-    %ul.details_lists
+= render partial: './modules/header'
+.details
+  %ul.details_lists
+    %li.details_list
+      = link_to '/',class: "detail_list" do
+        = @parent.category_name
+    %li.details_list
+      = link_to '/',class: "fa" do
+        >
+    - if @child
       %li.details_list
         = link_to '/',class: "detail_list" do
-          = @parent.category_name
+          = @child.category_name
       %li.details_list
         = link_to '/',class: "fa" do
           >
-      - if @child
-        %li.details_list
-          = link_to '/',class: "detail_list" do
-            = @child.category_name
-        %li.details_list
-          = link_to '/',class: "fa" do
-            >
-      - if @grandchild
-        %li.details_list
-          = link_to '/',class: "detail_list" do
-            = @grandchild.category_name
-        %li.details_list
-          = link_to '/',class: "fa" do
-            >
+    - if @grandchild
       %li.details_list
         = link_to '/',class: "detail_list" do
-          = @item.name
+          = @grandchild.category_name
+      %li.details_list
+        = link_to '/',class: "fa" do
+          >
+    %li.details_list
+      = link_to '/',class: "detail_list" do
+        = @item.name
 .mainWarrapp
   .detail__main
     .detail_main__box
@@ -145,7 +77,10 @@
           %th.item_details__lists
             ブランド
           %td.detail__content
-            = @brand
+            - if @brand == '不明'
+              = "---"
+            - else
+              = @brand
         %tr.item_details
           %th.item_details__lists
             商品の状態
@@ -191,63 +126,5 @@
         %li.other__right
           - if (@next_item.present?)
             = link_to item_path(@next_item.first.id),class: "after" do
-              次の商品＞
-    -# .category1_items
-    -#   = link_to '/',class: "category1_form" do
-    -#     メンズをもっと見る
-
-.middle-main
-  .middle-main__pickupContainer
-  .middle-main__appBanner
-    = image_tag("/images/bg-appBanner-pict.jpg", size: "#", alt: "haikei", class: "appBanner")
-    .middle-main__appBanner__inner
-      .middle-main__appBanner__inner__inner-title
-        だれでもかんたん、人生を変えるフリマアプリ
-      .middle-main__appBanner__inner__inner-title__inner-text
-        今すぐ無料ダウンロード！
-      .middle-main__appBanner__inner__inner-title__inner-text__inner-icon
-        = image_tag("/images/applestore.svg", size: "180x53", alt: "appletag", class: "inner-icon")
-        = image_tag("/images/googleplay.svg", size: "180x53", alt: "gogletag", class: "inner-icon")
-
-  .middle-main__top-footer
-    .middle-main__top-footer__case
-      .middle-main__top-footer__case__break
-        .middle-main__top-footer__case__break__footer-title
-          FURIMAについて
-        .middle-main__top-footer__case__break__footer-title__outline
-          会社概要（運営会社）
-        .middle-main__top-footer__case__break__footer-title__outline__privacy
-          プライバシーポリシー
-        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms
-          FURIMA利用規約
-        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant
-          ポイントに関する特約
-      .middle-main__top-footer__case__break
-        .middle-main__top-footer__case__break__footer-title
-          FURIMAを見る
-        .middle-main__top-footer__case__break__footer-title__outline
-          カテゴリー一覧
-        .middle-main__top-footer__case__break__footer-title__outline__privacy
-          ブランド一覧
-        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms
-        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant
-        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant__footer-logo
-          = image_tag("/images/logo-white.png", size: "", alt: "furima", class: "footer-logo")
-        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant__footer-logo__bottom-logo
-          © FURIMA
-      .middle-main__top-footer__case__break
-        .middle-main__top-footer__case__break__footer-title
-          ヘルプ＆ガイド
-        .middle-main__top-footer__case__break__footer-title__outline
-          FURIMAガイド
-        .middle-main__top-footer__case__break__footer-title__outline__privacy
-          FURIMAロゴ利用ガイドライン
-        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms
-          お知らせ
-
-  .middle-main__purchaseBtn
-    .middle-main__purchaseBtn__purchase-text
-      出品する
-      .middle-main__purchaseBtn__purchase-text__purchase-icon
-    = link_to image_tag("/images/icon_camera.svg", size: "54x54", alt: "furima", class: "purchase-icon"), new_item_path
-
+              次の商品 >
+= render partial: './modules/footer'

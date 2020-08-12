@@ -13,7 +13,7 @@ class Item < ApplicationRecord
 
   #image紐付け先のバリデーション
   validates_associated :images
-  validates :images, presence: { message: 'は１枚以上添付してください'}
+  # validates :images, presence: { message: 'は１枚以上添付してください'}
   #ここまでimageのバリデーション
   belongs_to :category
   

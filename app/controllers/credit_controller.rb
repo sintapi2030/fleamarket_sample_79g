@@ -38,22 +38,27 @@ class CreditController < ApplicationController
     
   def buy
     @item = Item.find(params[:item_id])
-    if @card.blank?
-      redirect_to action: "new"
-      flash[:alert] = '購入にはクレジットカード登録が必要です'
+    if @item.buyer_id.present?
+      flash[:alert] = '売却済みの商品です'
+      redirect_to root_path
     else
-      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
-      Payjp::Charge.create(
-        amount: @item.price,
-        customer: @card.customer_id,
-        currency: 'jpy',
-      )
-      if @item.update(buyer_id: current_user.id)
-        flash[:notice] = '購入しました。'
-        redirect_to item_path(@item.id)
+      if @card.blank?
+        redirect_to action: "new"
+        flash[:alert] = '購入にはクレジットカード登録が必要です'
       else
-        flash[:alert] = '購入に失敗しました。'
-        redirect_to item_path(@item.id)
+        Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
+        Payjp::Charge.create(
+          amount: @item.price,
+          customer: @card.customer_id,
+          currency: 'jpy',
+        )
+        if @item.update(buyer_id: current_user.id)
+          flash[:notice] = '購入しました。'
+          redirect_to item_path(@item.id)
+        else
+          flash[:alert] = '購入に失敗しました。'
+          redirect_to item_path(@item.id)
+        end
       end
     end
   end
