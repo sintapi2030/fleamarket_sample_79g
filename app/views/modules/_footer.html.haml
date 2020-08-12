@@ -1,0 +1,54 @@
+.middle-main
+  .middle-main__pickContainer
+  .middle-main__appBanner
+    = image_tag("/images/bg-appBanner-pict.jpg", size: "#", alt: "haikei", class: "appBanner")
+    .middle-main__appBanner__inner
+      .middle-main__appBanner__inner__inner-title
+        だれでもかんたん、人生を変えるフリマアプリ
+      .middle-main__appBanner__inner__inner-title__inner-text
+        今すぐ無料ダウンロード！
+      .middle-main__appBanner__inner__inner-title__inner-text__inner-icon
+        = image_tag("/images/applestore.svg", size: "180x53", alt: "appletag", class: "inner-icon")
+        = image_tag("/images/googleplay.svg", size: "180x53", alt: "gogletag", class: "inner-icon")
+
+  .middle-main__top-footer
+    .middle-main__top-footer__case
+      .middle-main__top-footer__case__break
+        .middle-main__top-footer__case__break__footer-title
+          FURIMAについて
+        .middle-main__top-footer__case__break__footer-title__outline
+          会社概要（運営会社）
+        .middle-main__top-footer__case__break__footer-title__outline__privacy
+          プライバシーポリシー
+        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms
+          FURIMA利用規約
+        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant
+          ポイントに関する特約
+      .middle-main__top-footer__case__break
+        .middle-main__top-footer__case__break__footer-title
+          FURIMAを見る
+        .middle-main__top-footer__case__break__footer-title__outline
+          カテゴリー一覧
+        .middle-main__top-footer__case__break__footer-title__outline__privacy
+          ブランド一覧
+        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms
+        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant
+        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant__footer-logo
+          = image_tag("/images/logo-white.png", size: "", alt: "furima", class: "footer-logo")
+        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms__covenant__footer-logo__bottom-logo
+          © FURIMA
+      .middle-main__top-footer__case__break
+        .middle-main__top-footer__case__break__footer-title
+          ヘルプ＆ガイド
+        .middle-main__top-footer__case__break__footer-title__outline
+          FURIMAガイド
+        .middle-main__top-footer__case__break__footer-title__outline__privacy
+          FURIMAロゴ利用ガイドライン
+        .middle-main__top-footer__case__break__footer-title__outline__privacy__terms
+          お知らせ
+          
+  .middle-main__purchaseBtn
+    .middle-main__purchaseBtn__purchase-text
+      出品する
+      .middle-main__purchaseBtn__purchase-text__purchase-icon
+    = link_to image_tag("/images/icon_camera.svg", size: "54x54", alt: "furima", class: "purchase-icon"), new_item_path
