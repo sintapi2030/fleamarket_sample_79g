@@ -184,6 +184,7 @@
 .other__images {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .image {

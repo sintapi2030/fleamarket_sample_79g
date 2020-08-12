@@ -84,7 +84,6 @@ class ItemsController < ApplicationController
 
 
   def edit
-
     @category_parent_array = Category.where(ancestry: nil)
     if @item.category.has_parent?
       if @item.category.parent.has_parent?
@@ -107,10 +106,10 @@ class ItemsController < ApplicationController
 
 
   def update
-    if @item.update_attributes(item_params)
+    @item.update(item_params)
+    if @item.valid?
       redirect_to item_path(@item)
     else
-      @item = Item.find(params[:id])
       @category_parent_array = Category.where(ancestry: nil)
       if @item.category.has_parent?
         if @item.category.parent.has_parent?
