@@ -212,13 +212,19 @@
                   .Sell_warrap_index_main_center_price_box_body_tax
                     販売手数料（10%）
                   %span.Sell_warrap_index_main_center_price_box_body_solid
-                    = "¥#{(@item.price * 0.1).floor}円"
+                    - if @item.price
+                      = "¥#{(@item.price * 0.1).floor}円"
+                    - else
+                      ー
                 %hr.Sell_warrap_index_main_center_border
                 .Sell_warrap_index_main_center_price_box_body
                   .Sell_warrap_index_main_center_price_box_body_tax
                     販売利益
                   %span.Sell_warrap_index_main_center_price_box_body_solid.benefit
-                    = "¥#{@item.price - (@item.price * 0.1).floor}円"
+                    - if @item.price
+                      = "¥#{@item.price - (@item.price * 0.1).floor}円"
+                    - else
+                      ー
                 = f.hidden_field :seller_id, {value: current_user.id}
             .Sell_warrap_index_main_center_ex
               = f.submit "変更する" ,class: "Sell_warrap_index_main_center_ex_do"
