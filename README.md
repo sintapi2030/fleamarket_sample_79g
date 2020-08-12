@@ -55,23 +55,17 @@ Users can create their free-market accounts with this application, and sell or p
 <dd>payjp</dd>
 </dl>
 
-
-## データベース設計:Database design
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database ER chart
----------------
+# Installation
+```command line
+$ git clone https://github.com/bignose-flower/fleamarket_sample_79g.git
+$ cd fleamarket_sample_79g
+$ bundle install
+$ yarn install
+$ rails db:create
+$ rails db:migrate
+$ rails db:seed
+$ rails s
+```
 
 ## ERD図:EntityRelashionshipDiagram
 
