@@ -49,7 +49,7 @@
             %li.AddressInfo__name
               = "#{@seller.family_name}#{@seller.first_name} 様"
         .Confirmation-Content__rightfield
-          = link_to "配送先を変更する", '#'
+          = link_to "配送先を変更する", edit_address_path(current_user.address.id)
     .ButtonBox
       = form_tag(buy_credit_index_path, method: :post) do
         = hidden_field_tag :item_id, @item.id

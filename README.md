@@ -1,5 +1,62 @@
 # README
+# TECH::EXPERT渋谷校79期短期集中就職コース最終課題
 
+フリマアプリのクローンサイトを5人で作成しました。
+
+ユーザーの新規登録から商品の出品及び購入ができます。
+
+This web application that hosts a free-market is developed by three developers.
+
+Users can create their free-market accounts with this application, and sell or purchase products.
+
+## 説明:Description
+
+・商品出品機能として画像や商品カテゴリを含めた複数項目の情報をDBへ登録することができます。
+
+・商品購入機能としてユーザーが所持するクレジットカードを用いて商品の購入ができます。
+
+・Users can produce their products by uploading a photo or selecting its category, which will be stored in a database.
+
+・When users purchases a product, the credit card that is registered in their account can be used.
+
+
+## 開発環境:Development environment
+
+<dl>
+
+<dt>Server ID</dt>
+
+<dd> http://54.248.17.253/ </dd>
+
+<dt>Basic Authentification and test users</dt>
+
+<dd>最終課題説明文の資料を参考ください。</dd>
+
+<dd>Please refer to our description document.</dd>
+
+<dt>Development environment</dt>
+
+<dd>Ruby 2.6.5</dd>
+
+<dd>Ruby on Rails 6.0.0</dd>
+
+<dd>mysql2</dd>
+
+<dd>haml-rails', ">= 1.0", '<= 2.0.1</dd>
+
+<dd>sass-rails', '~> 5</dd>
+
+<dd>jbuilder', '~> 2.7</dd>
+
+<dd>AWS EC2</dd>
+
+<dd>S3</dd>
+<dd>gem 'bootsnap', '>= 1.4.2</dd>
+<dd>payjp</dd>
+</dl>
+
+
+## データベース設計:Database design
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
@@ -14,6 +71,10 @@ Things you may want to cover:
 * Database creation
 
 * Database ER chart
+---------------
+
+## ERD図:EntityRelashionshipDiagram
+
 <img width="633" alt="スクリーンショット 2020-07-22 19 25 52" src="https://user-images.githubusercontent.com/66852865/88165808-3f060d80-cc51-11ea-8d78-de5ee6dd07d6.png">
 
 ## Users
@@ -97,8 +158,6 @@ belongs_to :brand
 ### association
 belongs_to :item
 
-### association
-
 ## brands
 | Column     | Type       | Options    |
 | ---------- | -----------| ---------- |
@@ -125,5 +184,3 @@ has_many :items
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-zxczxczxczasdas
