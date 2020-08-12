@@ -145,7 +145,10 @@
           %th.item_details__lists
             ブランド
           %td.detail__content
-            = @brand
+            - if @brand == '不明'
+              = "---"
+            - else
+              = @brand
         %tr.item_details
           %th.item_details__lists
             商品の状態

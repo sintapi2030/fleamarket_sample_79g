@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
   def show
     @user_name = User.find(@item.seller_id).nickname
     @owner_place = User.find(@item.seller_id).address.prefecture.name
-    @brand = Brand.find(@item.id).brand_name
+    @brand = Brand.find(@item.brand_id).brand_name
     @category_name = Category.find(@item.category_id).category_name
     @shipping = Shipping.find(@item.shipping_id).name
     @status = Status.find(@item.status_id).name
