@@ -30,7 +30,6 @@ class User < ApplicationRecord
 
   has_one :account
   has_one :address
-ream/master
   has_many :items
   has_one :credit
 end
