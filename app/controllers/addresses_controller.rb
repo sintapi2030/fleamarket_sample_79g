@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  before_action: move_to_index
   def edit
     @address = Address.find_by(user_id: current_user.id)
   end

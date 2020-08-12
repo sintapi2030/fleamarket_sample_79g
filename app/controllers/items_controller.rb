@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:show, :edit,:update, :destroy, :confirmation]
+  before_action :are_you_owner, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order(id:'DESC').limit(4)
@@ -37,19 +38,24 @@ class ItemsController < ApplicationController
   end
 
   def confirmation
-    if @item.buyer_id
-      flash[:alert] = '売却済みの商品のため、購入できません'
-      redirect_to action: "show"
-    end
-    @card = current_user.credit
-    if @card.blank?
-      redirect_to controller: "credit", action: "new"
-      flash[:alert] = '購入にはクレジットカード登録が必要です'
+    if @item.seller_id == current_user.id
+      flash[:alert] = "出品者は購入できません"
+      redirect_to root_path
     else
-      Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
-      customer = Payjp::Customer.retrieve(@card.customer_id)
-      @customer_card = customer.cards.retrieve(@card.card_id)
-      @seller = User.find(@item.seller_id)
+      if @item.buyer_id
+        flash[:alert] = '売却済みの商品のため、購入できません'
+        redirect_to action: "show"
+      end
+      @card = current_user.credit
+      if @card.blank?
+        redirect_to controller: "credit", action: "new"
+        flash[:alert] = '購入にはクレジットカード登録が必要です'
+      else
+        Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_PRIVATE_KEY]
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        @customer_card = customer.cards.retrieve(@card.card_id)
+        @seller = User.find(@item.seller_id)
+      end
     end
   end
 
@@ -142,6 +148,13 @@ end
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def are_you_owner
+    if @item.seller_id != current_user.id
+      flash[:alert] = "商品を出品された方のみ実行可能です。"
+      redirect_to root_path
+    end
   end
 
   def move_to_index
