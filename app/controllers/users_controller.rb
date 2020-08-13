@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :move_to_index
   def edit
     @user=User.find(current_user.id)
   end
@@ -18,5 +19,12 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:nickname)
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      flash[:alert] = "ユーザー情報はログイン後に行ってください"
+      redirect_to root_path
+    end
   end
 end

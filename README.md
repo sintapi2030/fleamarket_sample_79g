@@ -1,13 +1,13 @@
 # README
 # TECH::EXPERT渋谷校79期短期集中就職コース最終課題
 
-フリマアプリのクローンサイトを5人で作成しました。
+・フリマアプリのクローンサイトを5人で作成しました。
 
-ユーザーの新規登録から商品の出品及び購入ができます。
+・ユーザーの新規登録から商品の出品及び購入ができます。
 
-This web application that hosts a free-market is developed by three developers.
+・This web application that hosts a free-market is developed by three developers.
 
-Users can create their free-market accounts with this application, and sell or purchase products.
+・Users can create their free-market accounts with this application, and sell or purchase products.
 
 ## 説明:Description
 
@@ -55,23 +55,17 @@ Users can create their free-market accounts with this application, and sell or p
 <dd>payjp</dd>
 </dl>
 
-
-## データベース設計:Database design
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database ER chart
----------------
+# Installation
+```command line
+$ git clone https://github.com/bignose-flower/fleamarket_sample_79g.git
+$ cd fleamarket_sample_79g
+$ bundle install
+$ yarn install
+$ rails db:create
+$ rails db:migrate
+$ rails db:seed
+$ rails s
+```
 
 ## ERD図:EntityRelashionshipDiagram
 
@@ -177,10 +171,13 @@ has_many :items
 ### association
 has_many :items
 
-* Database initialization
+# Usage
 
-* How to run the test suite
+### 商品を出品する
+<a href="https://gyazo.com/63d8a0e4070768633839d1fa129c3e83"><img src="https://i.gyazo.com/63d8a0e4070768633839d1fa129c3e83.gif" alt="Image from Gyazo" width="1000"/></a>
 
-* Services (job queues, cache servers, search engines, etc.)
+### 商品購入
+<a href="https://gyazo.com/c4d0ba7d0c8b1c39d067500ab4bff6a9"><img src="https://i.gyazo.com/c4d0ba7d0c8b1c39d067500ab4bff6a9.gif" alt="Image from Gyazo" width="1000"/></a>
 
-* Deployment instructions
+### クレジットカード登録
+<a href="https://gyazo.com/5ab7582fdde2d4d7dbc7720bed8b4f99"><img src="https://i.gyazo.com/5ab7582fdde2d4d7dbc7720bed8b4f99.gif" alt="Image from Gyazo" width="1000"/></a>
