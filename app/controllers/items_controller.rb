@@ -138,7 +138,7 @@ end
 
 
   def destroy
-
+    @item.destroy
   end
 
   private
